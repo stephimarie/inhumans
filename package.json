@@ -20,7 +20,9 @@
   "homepage": "https://github.com/VictorMoscone/inhumans#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
     "mysql2": "^2.2.5",
     "sequelize": "^6.4.0"
-  }
+  },
+  "devDependencies": {}
 }
