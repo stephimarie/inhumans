@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "Kmuraoka808!",
-    "database": "inhumans_test_db",
+    "password": "password",
+    "database": "inhumans_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
