@@ -28,5 +28,17 @@ module.exports = (app) => {
   });
 
   // PUT route for updating todos. The updated todo will be available in req.body
-  app.put("/api/todos", (req, res) => {});
+  app.put("/api/todos", (req, res) => {
+    db.Todo.update(
+      {
+        text: req.body.text,
+        complete: req.body.complete,
+      },
+      {
+        where: {
+          id: req.body.id,
+        },
+      }
+    ).then((inhumans_test_db) => res.json(inhumans_test_db));
+  });
 };
