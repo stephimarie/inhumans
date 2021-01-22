@@ -1,19 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
-  const Todo = sequelize.define("Todo", {
-    text: {
+  const Actors = sequelize.define("Actors", {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1],
+        len: [1,40],
       },
     },
-    complete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true,
       validate: {
-        len: [1],
+        len: [1,40],
       },
     },
   });
-  return Todo;
+  return Actors;
 };

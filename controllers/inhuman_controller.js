@@ -1,44 +1,47 @@
 const db = require("../models");
 
 module.exports = (app) => {
-  // GET route for getting all of the todos
-  app.get("/api/todos", (req, res) => {
-    // Find all todos, and return them to the user with res.json
-    db.Todo.findAll({}).then((inhumans_test_db) => {
-      res.json(inhumans_test_db);
+  // GET route for getting all of the Actors
+  app.get("/api/Actors", (req, res) => {
+    // Find all Actors, and return them to the user with res.json
+    db.Actors.findAll({}).then((inhumans_db) => {
+      res.json(inhumans_db);
     });
   });
-  // POST route for saving a new todo. You can create a todo using the data on req.body
-  app.post("/api/todos", (req, res) => {
-    db.Todo.create({
-      text: req.body.text,
-      complete: req.body.complete,
-    }).then((dbTodo) => res.json(dbTodo));
+  // POST route for saving a new Actor. You can create a Actor using the data on req.body
+  app.post("/api/Actors", (req, res) => {
+    console.log(req.body);
+    db.Actors.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+    }).then((inhumans_db) => {
+      res.json(inhumans_db)
+    });
   });
 
-  // DELETE route for deleting todos. You can access the todo's id in req.params.id
-  app.delete("/api/todos/:id", (req, res) => {
-    db.Todo.destroy({
+  // DELETE route for deleting Actors. You can access the Actor's id in req.params.id
+  app.delete("/api/Actors/:id", (req, res) => {
+    db.Actors.destroy({
       where: {
         id: req.params.id,
       },
-    }).then((inhumans_test_db) => {
-      res.json(inhumans_test_db);
+    }).then((inhumans_db) => {
+      res.json(inhumans_db);
     });
   });
 
-  // PUT route for updating todos. The updated todo will be available in req.body
-  app.put("/api/todos", (req, res) => {
-    db.Todo.update(
+  // PUT route for updating Actors. The updated Actor will be available in req.body
+  app.put("/api/Actors:id", (req, res) => {
+    db.Actors.update(
       {
-        text: req.body.text,
-        complete: req.body.complete,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
       },
       {
         where: {
-          id: req.body.id,
+          id: req.params.id,
         },
       }
-    ).then((inhumans_test_db) => res.json(inhumans_test_db));
+    ).then((inhumans_db) => res.json(inhumans_db));
   });
 };

@@ -18,7 +18,7 @@ app.set("view engine", "handlebars");
 
 // app.use(routes);
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({}).then(() => {
   app.listen(PORT, () =>
     console.log(`Listening on PORT ${PORT}. Live at http://localhost:${PORT}`)
   );
