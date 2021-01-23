@@ -1,2 +1,3 @@
-CREATE DATABASE IF NOT EXISTS inhumans_test_db;
-USE inhumans_test_db;
+DROP DATABASE IF EXISTS inhumans_db;
+CREATE DATABASE inhumans_db;
+USE inhumans_db;
