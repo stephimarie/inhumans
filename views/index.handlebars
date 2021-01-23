@@ -1,1 +1,45 @@
 <h1>This is the main page</h1>
+<script>
+  // Make sure we wait to attach our handlers until the DOM is fully loaded.
+document.addEventListener("DOMContentLoaded", (event) => {
+  if (event) {
+    console.info("DOM loaded");
+  }
+
+  // CREATE
+  const createActorBtn = document.getElementById("create-actor-form");
+
+  if (createActorBtn) {
+    createActorBtn.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      // Grabs the value of the textarea in the input for firstName and lastName
+      const newActor = {
+        firstName: document.getElementById("firstName").value.trim(),
+        lastName: document.getElementById("firstName").value.trim(),
+      };
+
+      // Send POST request to create a new quote
+      fetch("/api/actors", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+
+        // Make sure to serialize the JSON body
+        body: JSON.stringify(newActor),
+      }).then(() => {
+        // Empty the form
+        document.getElementById("firstName").value = "";
+        document.getElementById("lastName").value = "";
+
+        // Reload the page so the user can see the new actor
+        console.log("Created a new actor!");
+        location.reload();
+      });
+    });
+  }
+});
+
+</script>
