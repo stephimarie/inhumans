@@ -3,7 +3,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const app = express();
 const db = require("./models");
-const PORT = 4000 || process.env.PORT;
+const PORT = 8000 || process.env.PORT;
 
 app.use(express.static("public"));
 
