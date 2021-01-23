@@ -1,10 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-  const Actors = sequelize.define("Actors", {
+
+  const { Sequelize } = sequelize;
+  const Actor = sequelize.define("Actor", {
+
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1,40],
+        len: [1, 40],
       },
     },
     lastName: {
@@ -14,6 +17,14 @@ module.exports = (sequelize, DataTypes) => {
         len: [1,40],
       },
     },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: Sequelize.literal("now()"),
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: Sequelize.literal("now()"),
+    },
   });
-  return Actors;
+  return Actor;
 };
