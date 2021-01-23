@@ -4,13 +4,13 @@ module.exports = (app) => {
   // GET route for getting all of the actors
   app.get("/api/actors", (req, res) => {
     // Find all actors, and return them to the user with res.json
-    db.Actor.findAll({}).then((inhumans_test_db) => {
+    db.Actor.findAll({}).then((inhumans_db) => {
       let actorsArray = [];
-      for (let i = 0; i < inhumans_test_db.length; i++) {
+      for (let i = 0; i < inhumans_db.length; i++) {
         let actor = {
-          id: inhumans_test_db[i].id,
-          firstName: inhumans_test_db[i].firstName,
-          lastName: inhumans_test_db[i].lastName,
+          id: inhumans_db[i].id,
+          firstName: inhumans_db[i].firstName,
+          lastName: inhumans_db[i].lastName,
         };
         actorsArray.push(actor);
       }
@@ -20,31 +20,31 @@ module.exports = (app) => {
         actors: actorsArray,
       });
 
-      // res.json(inhumans_test_db);
+      // res.json(inhumans_db);
     });
   });
 
   // GET route for getting all of the Actors
   app.get("/api/Actors", (req, res) => {
     // Find all Actors, and return them to the user with res.json
-    db.Actors.findAll({}).then((inhumans_db) => {
+    db.Actor.findAll({}).then((inhumans_db) => {
       res.json(inhumans_db);
     });
   });
   // POST route for saving a new Actor. You can create a Actor using the data on req.body
   app.post("/api/Actors", (req, res) => {
     console.log(req.body);
-    db.Actors.create({
+    db.Actor.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
     }).then((inhumans_db) => {
-      res.json(inhumans_db)
+      res.json(inhumans_db);
     });
   });
 
   // DELETE route for deleting Actors. You can access the Actor's id in req.params.id
   app.delete("/api/Actors/:id", (req, res) => {
-    db.Actors.destroy({
+    db.Actor.destroy({
       where: {
         id: req.params.id,
       },
