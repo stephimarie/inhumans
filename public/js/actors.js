@@ -67,26 +67,56 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   // DELETE
-  const deleteActorBtns = document.querySelectorAll("#deleteActor");
+  const deleteActorBtns = document.querySelectorAll(".delete-actor");
+  const deleteActorForm = document.querySelector("#delete-actor-form");
+  const deleteActorModal = document.querySelector("#delete-actor-modal");
 
-  // Set up the event listener for the delete actor buttons
-  if (deleteActorBtns) {
-    deleteActorBtns.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        // Grabs the id of the element that goes by the name, "id"
-        const id = event.target.getAttribute("data-id");
+  // Set up the event listeners for each delete button, and modal body
 
-        deleteActor(id);
+  deleteActorBtns.forEach((button) => {
+    button.addEventListener("click", () => {
+      // Grabs the id of the element that goes by the name, "id"
+      console.log("hi");
+      const id = button.dataset.id;
+      const first_name = button.dataset.first_name;
+      const last_name = button.dataset.last_name;
 
-        // Reload the page so the user can see that the actor was deleted
-        console.log("Deleted actor with id: " + id);
+      console.log("Deleting actor with id: ", id);
+
+      document.getElementById("delete-modal-body").textContent =
+        "Are you sure you want to delete this actor: " +
+        first_name +
+        " " +
+        last_name +
+        "?";
+
+      deleteActorForm.children[0].value = id;
+    });
+  });
+
+  if (deleteActorForm) {
+    deleteActorForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const id = deleteActorForm.children[0].value;
+
+      // Send the delete request
+      deleteActor(id).then((res) => {
+        console.log(res);
+        console.log(`Deleted Actor with ID: ${id}`);
+
+        // Reload the page
         location.reload();
       });
     });
   }
 
+  // // Reload the page so the user can see that the actor was deleted
+  // console.log("Deleted actor with id: " + id);
+  // location.reload();
+
   // UPDATE
-  const editActorBtns = document.querySelectorAll("#editActor");
+  const updateActorBtns = document.querySelectorAll(".update-actor");
   const updateActorForm = document.getElementById("update-actor-form");
 
   // Set up the event listener for the edit Actor buttons to open modal and display the current values in the input fields
