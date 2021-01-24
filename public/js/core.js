@@ -28,40 +28,42 @@ const actorsList = [
 ];
 
 // This is a placeholder array of objects that would normally be fetched from our DB.
-const actorsList = [
-    actor1 = {
+const roomList = [
+    room1 = {
         id: 1,
-        firstName: "Black",
-        lastName: "Bolt",
+        roomName: "Agon's Tower",
+        adjacentTo: [2,3,4],
     },
-    actor2 = {
+    room2 = {
         id: 2,
-        firstName: "Medusa",
-        lastName: ""
+        roomName: "Pit of the Dead",
+        adjacentTo: [1,3,5],
     },
-    actor3 = {
+    room3 = {
         id: 3,
-        firstName: "Karnak",
-        lastName: "the Shatterer"
+        roomName: "The Palace",
+        adjacentTo: [1,2,4,5],
     },
-    actor4 = {
+    room4 = {
         id: 4,
-        firstName: "Crystal",
-        lastName: ""
+        roomName: "Old Attilan Harbor",
+        adjacentTo: [1,3,5],
     },
-    actor5 = {
+    room5 = {
         id: 5,
-        firstName: "Lockjaw",
-        lastName: ""
+        roomName: "Terrigen Lab",
+        adjacentTo: [2,3,4],
     }
 ];
 
-simStart();
-
 const simStart = () => {
     const isKiller = actorsList[rng(0, actorsList.length)];
-}
+    const murderRoom = roomList[rng(0, roomList.length)];
+    console.log(`${isKiller.firstName} ${isKiller.lastName} has commited a murder in ${murderRoom.roomName}!`)
+};
 
 const rng = (min, max) => {
     return Math.floor(Math.random()*max) + min;
-}
+};
+
+simStart();
