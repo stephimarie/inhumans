@@ -76,17 +76,18 @@ const initialPlacement = () => {
     //Basic function that randomly determines the initial placement of each actor.
     actorsList.forEach((val) => {
         //We're pushing to roomHabitants array, each actor's object.
-        roomHabitants[rng(0,roomList.length)].push(val)
+        roomHabitants[rng(0,roomList.length)].push(val);
     })
 };
 
 const roomStatus = () => {
     roomHabitants.forEach((val) => {
+        const currentRoom = roomList[roomHabitants.indexOf(val)].roomName;
         if (val[0] == undefined) {
-            console.log("This room is empty.")
+            console.log(`There is nobody inside ${currentRoom}.`);
         } else {
             Object.values(val).forEach(data => {
-                console.log(data.firstName)
+                console.log(`${data.firstName} is inside ${currentRoom}.`);
             });
         };
     });
