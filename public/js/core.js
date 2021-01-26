@@ -1,3 +1,7 @@
+const turns = {
+    turn: 0,
+}
+
 // This is a placeholder array of objects that would normally be fetched from our DB.
 const actorsList = [
     actor1 = {
@@ -82,6 +86,7 @@ const simStart = () => {
     console.log(`A Skrull has struck at the heart of the Inhumans!`)
     initialPlacement();
     roomStatus();
+    simTurn();
 };
 
 const setKiller = () => {
@@ -105,6 +110,12 @@ const initialPlacement = () => {
     });
 };
 
+const simTurn = () => {
+    turns.turn += 1
+    console.log(`Turn ${turns.turn} begins.`)
+};
+
+// A utility function that checks to see if the actor is in the murder room.
 const investigateRoom = (room, actor) => {
     if (room.isMurderRoom == true && actor.isKiller == false) {
         actor.foundRoom = room.id;
@@ -114,6 +125,7 @@ const investigateRoom = (room, actor) => {
     };
 };
 
+// A utility function that returns the index value of the murder room.
 const murderRoomCheck = () => {
     let roomNum = 0;
     roomList.forEach((val) => {
@@ -126,6 +138,7 @@ const murderRoomCheck = () => {
     return roomNum;
 };
 
+// A major function that checks and prints the status of all actors.
 const roomStatus = () => {
     roomList.forEach((val) => {
         if (val.occupants.length == 0) {
@@ -151,10 +164,12 @@ const roomStatus = () => {
     });
 };
 
+// A minor utility function that allows for RNG rolls.
 const rng = (min, max) => {
     return Math.floor(Math.random()*max) + min;
 };
 
+// A minor utility function that allows for RNG rolls that exclude 1 number.
 const rngExclusion = (min, max, exc) => {
     let rangeArray = [];
     for (let i = min; i < max; i++) {
