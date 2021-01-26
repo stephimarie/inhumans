@@ -67,13 +67,14 @@ const roomList = [
 ];
 
 const simStart = () => {
+    //TODO: Consolidate these variables into their respective functions.
     const killer = actorsList[rng(0, actorsList.length)];
     const murderRoom = roomList[rng(0, roomList.length)];
     setKiller(killer);
     setMurderRoom(murderRoom);
     // TODO: Change this to be more vague.
     console.log(`${killer.identity} has commited a murder in ${murderRoom.roomName}!`)
-    initialPlacement(murderRoom);
+    initialPlacement();
     roomStatus();
 };
 
@@ -85,14 +86,13 @@ const setMurderRoom = (murderRoom) => {
     murderRoom.isMurderRoom = true;
 };
 
-const initialPlacement = (murderRoom) => {
+const initialPlacement = () => {
     //Basic function that randomly determines the initial placement of each actor.
     actorsList.forEach((val) => {
         if (val.isKiller == true) {
-            roomList[roomList.indexOf(murderRoom)].occupants.push(val);
+            roomList[murderRoomCheck()].occupants.push(val);
         } else {
             // TODO: Innocent actors cannot start in murder room.
-            console.log(murderRoomCheck());
             roomList[rng(0,roomList.length)].occupants.push(val);
         };
     });
@@ -124,6 +124,16 @@ const murderRoomCheck = () => {
 
 const rng = (min, max) => {
     return Math.floor(Math.random()*max) + min;
+};
+
+const rngExclusion = (min, max, exc) => {
+    rangeArray = [];
+    for (let i = min; i < max; i++) {
+        if (i != exc) {
+            rangeArray.push(i);
+        };
+    };
+    return rangeArray[Math.floor(Math.random()*rangeArray.length)];
 };
 
 simStart();
