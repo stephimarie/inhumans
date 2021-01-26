@@ -93,7 +93,7 @@ const initialPlacement = () => {
             roomList[murderRoomCheck()].occupants.push(val);
         } else {
             // TODO: Innocent actors cannot start in murder room.
-            roomList[rng(0,roomList.length)].occupants.push(val);
+            roomList[rngExclusion(0,roomList.length,murderRoomCheck())].occupants.push(val);
         };
     });
 };
