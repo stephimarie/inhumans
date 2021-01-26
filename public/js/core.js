@@ -92,7 +92,6 @@ const initialPlacement = () => {
         if (val.isKiller == true) {
             roomList[murderRoomCheck()].occupants.push(val);
         } else {
-            // TODO: Innocent actors cannot start in murder room.
             roomList[rngExclusion(0,roomList.length,murderRoomCheck())].occupants.push(val);
         };
     });
@@ -100,8 +99,20 @@ const initialPlacement = () => {
 
 const roomStatus = () => {
     roomList.forEach((val) => {
-        if (val.occupants[0] == undefined) {
+        if (val.occupants.length == 0) {
             console.log(`There is nobody inside ${val.roomName}.`);
+        } else if (val.occupants.length > 1) {
+            let allOcc = [];
+            for (let i = 0; i < val.occupants.length; i++) {
+                if (i == 0) {
+                    allOcc.push(`${val.occupants[i].identity}`);
+                } else if (i == val.occupants.length - 1) {
+                    allOcc.push(` and ${val.occupants[i].identity}`);
+                } else if (i < val.occupants.length) {
+                    allOcc.push(`, ${val.occupants[i].identity},`);
+                };
+            };
+            console.log(`${allOcc.join('')} are inside ${val.roomName}.`);
         } else {
             Object.values(val.occupants).forEach(data => {
                 console.log(`${data.identity} is inside ${val.roomName}.`);
@@ -111,7 +122,7 @@ const roomStatus = () => {
 };
 
 const murderRoomCheck = () => {
-    roomNum = 0;
+    let roomNum = 0;
     roomList.forEach((val) => {
             if (val.isMurderRoom == true) {
                 roomNum = roomList.indexOf(val)
@@ -127,7 +138,7 @@ const rng = (min, max) => {
 };
 
 const rngExclusion = (min, max, exc) => {
-    rangeArray = [];
+    let rangeArray = [];
     for (let i = min; i < max; i++) {
         if (i != exc) {
             rangeArray.push(i);
