@@ -113,6 +113,8 @@ const initialPlacement = () => {
 const simTurn = () => {
     turns.turn += 1
     console.log(`Turn ${turns.turn} begins.`)
+    // TODO: Setup movement.
+    actorsMove();
 };
 
 // A utility function that checks to see if the actor is in the murder room.
