@@ -69,14 +69,27 @@ const simStart = () => {
     const murderRoom = roomList[rng(0, roomList.length)];
     console.log(`${isKiller.firstName} ${isKiller.lastName} has commited a murder in ${murderRoom.roomName}!`)
     initialPlacement();
-    console.log(roomHabitants);
+    roomStatus();
 };
 
 const initialPlacement = () => {
     //Basic function that randomly determines the initial placement of each actor.
     actorsList.forEach((val) => {
+        //We're pushing to roomHabitants array, each actor's object.
         roomHabitants[rng(0,roomList.length)].push(val)
     })
+};
+
+const roomStatus = () => {
+    roomHabitants.forEach((val) => {
+        if (val[0] == undefined) {
+            console.log("This room is empty.")
+        } else {
+            Object.values(val).forEach(data => {
+                console.log(data.firstName)
+            });
+        };
+    });
 };
 
 const rng = (min, max) => {
