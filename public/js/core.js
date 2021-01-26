@@ -2,32 +2,27 @@
 const actorsList = [
     actor1 = {
         id: 1,
-        firstName: "Black",
-        lastName: "Bolt",
+        identity: "Black Bolt",
         isKiller: false,
     },
     actor2 = {
         id: 2,
-        firstName: "Medusa",
-        lastName: "",
+        identity: "Medusa",
         isKiller: false,
     },
     actor3 = {
         id: 3,
-        firstName: "Karnak",
-        lastName: "the Shatterer",
+        identity: "Karnak the Shatterer",
         isKiller: false,
     },
     actor4 = {
         id: 4,
-        firstName: "Crystal",
-        lastName: "",
+        identity: "Crystal",
         isKiller: false,
     },
     actor5 = {
         id: 5,
-        firstName: "Lockjaw",
-        lastName: "",
+        identity: "Lockjaw",
         isKiller: false,
     }
 ];
@@ -38,35 +33,35 @@ const roomList = [
         id: 1,
         roomName: "Agon's Tower",
         adjacentTo: [2,3,4],
-        isMurderRoon: false,
+        isMurderRoom: false,
         occupants: [],
     },
     room2 = {
         id: 2,
         roomName: "Pit of the Dead",
         adjacentTo: [1,3,5],
-        isMurderRoon: false,
+        isMurderRoom: false,
         occupants: [],
     },
     room3 = {
         id: 3,
         roomName: "The Palace",
         adjacentTo: [1,2,4,5],
-        isMurderRoon: false,
+        isMurderRoom: false,
         occupants: [],
     },
     room4 = {
         id: 4,
         roomName: "Old Attilan Harbor",
         adjacentTo: [1,3,5],
-        isMurderRoon: false,
+        isMurderRoom: false,
         occupants: [],
     },
     room5 = {
         id: 5,
         roomName: "Terrigen Lab",
         adjacentTo: [2,3,4],
-        isMurderRoon: false,
+        isMurderRoom: false,
         occupants: [],
     }
 ];
@@ -76,7 +71,8 @@ const simStart = () => {
     const murderRoom = roomList[rng(0, roomList.length)];
     setKiller(killer);
     setMurderRoom(murderRoom);
-    console.log(`${killer.firstName} ${killer.lastName} has commited a murder in ${murderRoom.roomName}!`)
+    // TODO: Change this to be more vague.
+    console.log(`${killer.identity} has commited a murder in ${murderRoom.roomName}!`)
     initialPlacement(murderRoom);
     roomStatus();
 };
@@ -95,6 +91,8 @@ const initialPlacement = (murderRoom) => {
         if (val.isKiller == true) {
             roomList[roomList.indexOf(murderRoom)].occupants.push(val);
         } else {
+            // TODO: Innocent actors cannot start in murder room.
+            murderRoomCheck();
             roomList[rng(0,roomList.length)].occupants.push(val);
         };
     });
@@ -106,9 +104,19 @@ const roomStatus = () => {
             console.log(`There is nobody inside ${val.roomName}.`);
         } else {
             Object.values(val.occupants).forEach(data => {
-                console.log(`${data.firstName} is inside ${val.roomName}.`);
+                console.log(`${data.identity} is inside ${val.roomName}.`);
             });
         };
+    });
+};
+
+const murderRoomCheck = () => {
+    roomList.forEach((val) => {
+            if (val.isMurderRoom == true) {
+                return roomList.indexOf(val);
+            } else {
+                return;
+            };
     });
 };
 
