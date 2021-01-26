@@ -92,7 +92,7 @@ const initialPlacement = (murderRoom) => {
             roomList[roomList.indexOf(murderRoom)].occupants.push(val);
         } else {
             // TODO: Innocent actors cannot start in murder room.
-            murderRoomCheck();
+            console.log(murderRoomCheck());
             roomList[rng(0,roomList.length)].occupants.push(val);
         };
     });
@@ -111,13 +111,15 @@ const roomStatus = () => {
 };
 
 const murderRoomCheck = () => {
+    roomNum = 0;
     roomList.forEach((val) => {
             if (val.isMurderRoom == true) {
-                return roomList.indexOf(val);
+                roomNum = roomList.indexOf(val)
             } else {
                 return;
             };
     });
+    return roomNum;
 };
 
 const rng = (min, max) => {
