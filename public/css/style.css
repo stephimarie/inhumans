@@ -1,0 +1,26 @@
+.background {
+    background-image: url('../assets/Untitled-1\ copy.jpg');
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-size: cover;
+}
+
+.TitleIn {
+    image-orientation: center;
+    padding-left: 380px;
+}
+
+.btn-toolbar {
+    padding-left: 80px;
+    display: flex;
+}
+
+#Chart1:focus, #Chart2:focus, #Chart3:focus, #Chart4:focus {
+    background-color: aquamarine;
+    outline-style: none;
+}
+
+html {
+    height: 100%;
+}
