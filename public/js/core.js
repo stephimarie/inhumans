@@ -39,39 +39,36 @@ const roomList = [
         roomName: "Agon's Tower",
         adjacentTo: [2,3,4],
         isMurderRoon: false,
+        occupants: [],
     },
     room2 = {
         id: 2,
         roomName: "Pit of the Dead",
         adjacentTo: [1,3,5],
         isMurderRoon: false,
+        occupants: [],
     },
     room3 = {
         id: 3,
         roomName: "The Palace",
         adjacentTo: [1,2,4,5],
         isMurderRoon: false,
+        occupants: [],
     },
     room4 = {
         id: 4,
         roomName: "Old Attilan Harbor",
         adjacentTo: [1,3,5],
         isMurderRoon: false,
+        occupants: [],
     },
     room5 = {
         id: 5,
         roomName: "Terrigen Lab",
         adjacentTo: [2,3,4],
         isMurderRoon: false,
+        occupants: [],
     }
-];
-
-const roomHabitants = [
-    room1 = [],
-    room2 = [],
-    room3 = [],
-    room4 = [],
-    room5 = [],
 ];
 
 const simStart = () => {
@@ -80,7 +77,7 @@ const simStart = () => {
     setKiller(killer);
     setMurderRoom(murderRoom);
     console.log(`${killer.firstName} ${killer.lastName} has commited a murder in ${murderRoom.roomName}!`)
-    initialPlacement(murderRoom, killer);
+    initialPlacement(murderRoom);
     roomStatus();
 };
 
@@ -92,22 +89,24 @@ const setMurderRoom = (murderRoom) => {
     murderRoom.isMurderRoom = true;
 };
 
-const initialPlacement = (murderRoom, killer) => {
+const initialPlacement = (murderRoom) => {
     //Basic function that randomly determines the initial placement of each actor.
     actorsList.forEach((val) => {
-        //We're pushing to roomHabitants array, each actor's object.
-        roomHabitants[rng(0,roomList.length)].push(val);
-    })
+        if (val.isKiller == true) {
+            roomList[roomList.indexOf(murderRoom)].occupants.push(val);
+        } else {
+            roomList[rng(0,roomList.length)].occupants.push(val);
+        };
+    });
 };
 
 const roomStatus = () => {
-    roomHabitants.forEach((val) => {
-        const currentRoom = roomList[roomHabitants.indexOf(val)].roomName;
-        if (val[0] == undefined) {
-            console.log(`There is nobody inside ${currentRoom}.`);
+    roomList.forEach((val) => {
+        if (val.occupants[0] == undefined) {
+            console.log(`There is nobody inside ${val.roomName}.`);
         } else {
-            Object.values(val).forEach(data => {
-                console.log(`${data.firstName} is inside ${currentRoom}.`);
+            Object.values(val.occupants).forEach(data => {
+                console.log(`${data.firstName} is inside ${val.roomName}.`);
             });
         };
     });
