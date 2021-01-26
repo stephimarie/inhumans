@@ -4,26 +4,36 @@ const actorsList = [
         id: 1,
         identity: "Black Bolt",
         isKiller: false,
+        foundKiller: 0,
+        foundRoom: 0,
     },
     actor2 = {
         id: 2,
         identity: "Medusa",
         isKiller: false,
+        foundKiller: 0,
+        foundRoom: 0,
     },
     actor3 = {
         id: 3,
         identity: "Karnak the Shatterer",
         isKiller: false,
+        foundKiller: 0,
+        foundRoom: 0,
     },
     actor4 = {
         id: 4,
         identity: "Crystal",
         isKiller: false,
+        foundKiller: 0,
+        foundRoom: 0,
     },
     actor5 = {
         id: 5,
         identity: "Lockjaw",
         isKiller: false,
+        foundKiller: 0,
+        foundRoom: 0,
     }
 ];
 
@@ -95,6 +105,27 @@ const initialPlacement = () => {
     });
 };
 
+const investigateRoom = (room, actor) => {
+    if (room.isMurderRoom == true && actor.isKiller == false) {
+        actor.foundRoom = room.id;
+        console.log(`${actor.identity} has found the murder room!`);
+    } else {
+        return;
+    };
+};
+
+const murderRoomCheck = () => {
+    let roomNum = 0;
+    roomList.forEach((val) => {
+            if (val.isMurderRoom == true) {
+                roomNum = roomList.indexOf(val)
+            } else {
+                return;
+            };
+    });
+    return roomNum;
+};
+
 const roomStatus = () => {
     roomList.forEach((val) => {
         if (val.occupants.length == 0) {
@@ -114,21 +145,10 @@ const roomStatus = () => {
         } else {
             Object.values(val.occupants).forEach(data => {
                 console.log(`${data.identity} is inside ${val.roomName}.`);
+                investigateRoom(val, data);
             });
         };
     });
-};
-
-const murderRoomCheck = () => {
-    let roomNum = 0;
-    roomList.forEach((val) => {
-            if (val.isMurderRoom == true) {
-                roomNum = roomList.indexOf(val)
-            } else {
-                return;
-            };
-    });
-    return roomNum;
 };
 
 const rng = (min, max) => {
