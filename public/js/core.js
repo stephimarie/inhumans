@@ -67,22 +67,20 @@ const roomList = [
 ];
 
 const simStart = () => {
-    //TODO: Consolidate these variables into their respective functions.
-    const killer = actorsList[rng(0, actorsList.length)];
-    const murderRoom = roomList[rng(0, roomList.length)];
-    setKiller(killer);
-    setMurderRoom(murderRoom);
-    // TODO: Change this to be more vague.
-    console.log(`${killer.identity} has commited a murder in ${murderRoom.roomName}!`)
+    setKiller();
+    setMurderRoom();
+    console.log(`A Skrull has struck at the heart of the Inhumans!`)
     initialPlacement();
     roomStatus();
 };
 
-const setKiller = (killer) => {
+const setKiller = () => {
+    const killer = actorsList[rng(0, actorsList.length)];
     killer.isKiller = true;
 };
 
-const setMurderRoom = (murderRoom) => {
+const setMurderRoom = () => {
+    const murderRoom = roomList[rng(0, roomList.length)];
     murderRoom.isMurderRoom = true;
 };
 
