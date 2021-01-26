@@ -4,26 +4,31 @@ const actorsList = [
         id: 1,
         firstName: "Black",
         lastName: "Bolt",
+        isKiller: false,
     },
     actor2 = {
         id: 2,
         firstName: "Medusa",
-        lastName: ""
+        lastName: "",
+        isKiller: false,
     },
     actor3 = {
         id: 3,
         firstName: "Karnak",
-        lastName: "the Shatterer"
+        lastName: "the Shatterer",
+        isKiller: false,
     },
     actor4 = {
         id: 4,
         firstName: "Crystal",
-        lastName: ""
+        lastName: "",
+        isKiller: false,
     },
     actor5 = {
         id: 5,
         firstName: "Lockjaw",
-        lastName: ""
+        lastName: "",
+        isKiller: false,
     }
 ];
 
@@ -33,26 +38,31 @@ const roomList = [
         id: 1,
         roomName: "Agon's Tower",
         adjacentTo: [2,3,4],
+        isMurderRoon: false,
     },
     room2 = {
         id: 2,
         roomName: "Pit of the Dead",
         adjacentTo: [1,3,5],
+        isMurderRoon: false,
     },
     room3 = {
         id: 3,
         roomName: "The Palace",
         adjacentTo: [1,2,4,5],
+        isMurderRoon: false,
     },
     room4 = {
         id: 4,
         roomName: "Old Attilan Harbor",
         adjacentTo: [1,3,5],
+        isMurderRoon: false,
     },
     room5 = {
         id: 5,
         roomName: "Terrigen Lab",
         adjacentTo: [2,3,4],
+        isMurderRoon: false,
     }
 ];
 
@@ -65,14 +75,24 @@ const roomHabitants = [
 ];
 
 const simStart = () => {
-    const isKiller = actorsList[rng(0, actorsList.length)];
+    const killer = actorsList[rng(0, actorsList.length)];
     const murderRoom = roomList[rng(0, roomList.length)];
-    console.log(`${isKiller.firstName} ${isKiller.lastName} has commited a murder in ${murderRoom.roomName}!`)
-    initialPlacement();
+    setKiller(killer);
+    setMurderRoom(murderRoom);
+    console.log(`${killer.firstName} ${killer.lastName} has commited a murder in ${murderRoom.roomName}!`)
+    initialPlacement(murderRoom, killer);
     roomStatus();
 };
 
-const initialPlacement = () => {
+const setKiller = (killer) => {
+    killer.isKiller = true;
+};
+
+const setMurderRoom = (murderRoom) => {
+    murderRoom.isMurderRoom = true;
+};
+
+const initialPlacement = (murderRoom, killer) => {
     //Basic function that randomly determines the initial placement of each actor.
     actorsList.forEach((val) => {
         //We're pushing to roomHabitants array, each actor's object.
