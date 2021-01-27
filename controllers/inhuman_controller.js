@@ -25,14 +25,15 @@ module.exports = (app) => {
   });
 
   // GET route for getting all of the Actors
-  app.get("/api/Actors", (req, res) => {
+  app.get("/api/actors", (req, res) => {
     // Find all Actors, and return them to the user with res.json
     db.Actor.findAll({}).then((inhumans_db) => {
       res.json(inhumans_db);
     });
   });
+
   // POST route for saving a new Actor. You can create a Actor using the data on req.body
-  app.post("/api/Actors", (req, res) => {
+  app.post("/api/actors", (req, res) => {
     console.log(req.body);
     db.Actor.create({
       firstName: req.body.firstName,
@@ -43,7 +44,7 @@ module.exports = (app) => {
   });
 
   // DELETE route for deleting Actors. You can access the Actor's id in req.params.id
-  app.delete("/api/Actors/:id", (req, res) => {
+  app.delete("/api/actors/:id", (req, res) => {
     db.Actor.destroy({
       where: {
         id: req.params.id,
@@ -53,8 +54,8 @@ module.exports = (app) => {
     });
   });
 
-  // PUT route for updating todos. The updated todo will be available in req.body
-  app.put("/api/actors", (req, res) => {
+  // PUT route for updating actors. The updated actor will be available in req.body
+  app.put("/api/actors/:id", (req, res) => {
     db.Actor.update(
       {
         firstName: req.body.firstName,

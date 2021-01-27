@@ -18,10 +18,10 @@
     <li "button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
       <span><b>Name: </b>{{this.firstName}} {{this.lastName}}</span>
     <div class="button-group">
-      <button class="btn btn-sm btn-primary" id="viewActor" data-toggle="modal" data-target="#viewActorModal" data-id="{{ this.id }}" data-firstName="{{ this.firstName }}" data-lastName="{{ this.lastName }}"  
+      <button class="btn btn-sm btn-primary view-actor" data-toggle="modal" data-target="#view-actor-modal" data-id="{{ this.id }}" data-first_name="{{ this.firstName }}" data-last_name="{{ this.lastName }}"  
       ><i class="fas fa-eye mr-2"></i>View
       </button>
-      <button type="button" class="btn btn-sm btn-warning update-actor" data-toggle="modal" data-target="#update-actor-modal" data-id="{{ this.id }}" data-firstName="{{ this.firstName }}" data-lastName="{{ this.lastName }}" 
+      <button type="button" class="btn btn-sm btn-warning update-actor" data-toggle="modal" data-target="#update-actor-modal" data-id="{{ this.id }}" data-first_name="{{ this.firstName }}" data-last_name="{{ this.lastName }}" 
       ><i class="fas fa-edit mr-2"></i>Update
       </button>
       <button class="btn btn-sm btn-danger delete-actor" data-toggle="modal" data-target="#delete-actor-modal" data-id="{{ this.id }}" data-first_name="{{ this.firstName }}" data-last_name="{{ this.lastName }}"><i class="fas fa-trash-alt mr-2"></i>Delete
@@ -49,16 +49,16 @@
             </div>
             <div class="modal-body">
               <form id="create-actor-form">
-                <div class="form-group">
-                  <label for="firstName">First Name</label>
-                  <input class="form-control" placeholder="Enter the first name..." type="text" id="firstName"/>
+                <div class="form-row">
+                  <div class="form-group col-6">
+                    <label for="create-actor-first-name">First Name</label>
+                    <input class="form-control" placeholder="Enter the first name..." type="text" id="create-actor-first-name"/>
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="create-actor-last-name">Last Name:</label><br />
+                    <input class="form-control" type="text" placeholder="Enter the last name..." id="create-actor-last-name"/>
+                  </div>
                 </div>
-
-                <div class="form-group">
-                  <label for="lastName">Last Name:</label><br />
-                  <input class="form-control" type="text" placeholder="Enter the last name..." id="lastName"/>
-                </div>
-              
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Create Actor</button>
@@ -71,7 +71,7 @@
     
 
 {{!-- Modal to view a selected actor --}}
-{{!-- <div class="modal fade" id="viewActorModal" tabindex="-1">
+<div class="modal" id="view-actor-modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -81,23 +81,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="update-actor-form">
-          <div class="form-group">
-            <label for="viewFirstName" class="col-form-label">First Name:</label>
-            <input type="text" class="form-control" id="viewFirstName">
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label for="view-actor-first-name">First Name:</label>
+            <input type="text" class="form-control" id="view-actor-first-name">
           </div>
-          <div class="form-group">
-            <label for="viewLastName" class="col-form-label">Last Name:</label>
-            <input type="text" class="form-control" id="viewLastName"></input>
+          <div class="form-group col-6">
+            <label for="view-actor-last-name">Last Name:</label>
+            <input type="text" class="form-control" id="view-actor-last-name"></input>
           </div>
-        </form>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-</div> --}}
+</div>
 
 {{!-- Modal to update a selected actor --}}
 <modal class="modal" id="update-actor-modal" tabindex="-1">
@@ -109,25 +109,29 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form id="update-actor-form">
+      <form id="update-actor-form">
+        <div class="modal-body">
           <div class="form-group">
-            <label for="updateFirstName" class="col-form-label">First Name:</label>
-            <input type="text" class="form-control" id="updatedFirstName">
+            <input type="hidden" id="update-actor-id" class="form-control" required/>
           </div>
-          <div class="form-group">
-            <label for="updateLastName" class="col-form-label">Last Name:</label>
-            <input type="text" class="form-control" id="updatedLastName"></input>
+          <div class="form-row">
+            <div class="form-group　col-6">
+              <label for="update-actor-first-name">First Name:</label>
+              <input type="text" class="form-control" id="update-actor-first-name">
+            </div>
+            <div class="form-group　col-6">
+              <label for="update-actor-last-name">Last Name:</label>
+              <input type="text" class="form-control" id="update-actor-last-name"></input>
+            </div>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save Actor</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Actor</button>
+        </div>
+      </form>
     </div>
   </div>
-  
 </modal>
 
 {{!-- Delete confirmation Modal --}}
@@ -150,7 +154,7 @@
             <form id="delete-actor-form">
               <input
               type="hidden"
-              id="employee_id"
+              id="delete-actor-id"
               class="form-control"
               required
             />

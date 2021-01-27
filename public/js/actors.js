@@ -33,14 +33,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
   // A function for editing a actor from the db
-  const editActor = (id) =>
+  const updateActor = (id, actor) =>
     fetch(`/api/actors/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(actor),
     });
 
+  // ----------------------------------------------------------------------------------
   // CREATE
   const createActorForm = document.getElementById("create-actor-form");
   if (createActorForm) {
@@ -49,87 +51,66 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       // Grabs the value of the textarea in the input for firstName and lastName
       const newActor = {
-        firstName: document.getElementById("firstName").value.trim(),
-        lastName: document.getElementById("lastName").value.trim(),
+        firstName: document
+          .getElementById("create-actor-first-name")
+          .value.trim(),
+        lastName: document
+          .getElementById("create-actor-last-name")
+          .value.trim(),
       };
 
       // Send POST request to create a new actor
-      saveActor(newActor).then(() => {
-        // Empty the form
-        document.getElementById("firstName").value = "";
-        document.getElementById("lastName").value = "";
+      saveActor(newActor).then((response) => {
+        if (response.ok) {
+          // Empty the form
+          document.getElementById("create-actor-first-name").value = "";
+          document.getElementById("create-actor-last-name").value = "";
 
-        // Reload the page so the user can see the new actor
-        console.log("Created a new actor!");
-        location.reload();
+          // Reload the page so the user can see the new actor
+          console.log("Created a new actor!");
+          location.reload();
+        } else {
+          alert("Something went wrong");
+        }
       });
     });
   }
 
-  // DELETE
-  const deleteActorBtns = document.querySelectorAll(".delete-actor");
-  const deleteActorForm = document.querySelector("#delete-actor-form");
-  const deleteActorModal = document.querySelector("#delete-actor-modal");
+  // ------------------------------------------------------------------------------------
+  // READ
+  // Set up the event listener for the view Actor buttons to open modal
+  // and display the current values in the input fields
+  const viewActorBtns = document.querySelectorAll(".view-actor");
+  if (viewActorBtns) {
+    viewActorBtns.forEach((button) => {
+      button.addEventListener("click", () => {
+        const first_name = button.dataset.first_name;
+        const last_name = button.dataset.last_name;
 
-  // Set up the event listeners for each delete button, and modal body
-
-  deleteActorBtns.forEach((button) => {
-    button.addEventListener("click", () => {
-      // Grabs the id of the element that goes by the name, "id"
-      console.log("hi");
-      const id = button.dataset.id;
-      const first_name = button.dataset.first_name;
-      const last_name = button.dataset.last_name;
-
-      console.log("Deleting actor with id: ", id);
-
-      document.getElementById("delete-modal-body").textContent =
-        "Are you sure you want to delete this actor: " +
-        first_name +
-        " " +
-        last_name +
-        "?";
-
-      deleteActorForm.children[0].value = id;
-    });
-  });
-
-  if (deleteActorForm) {
-    deleteActorForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const id = deleteActorForm.children[0].value;
-
-      // Send the delete request
-      deleteActor(id).then((res) => {
-        console.log(res);
-        console.log(`Deleted Actor with ID: ${id}`);
-
-        // Reload the page
-        location.reload();
+        document.getElementById("view-actor-first-name").value = first_name;
+        document.getElementById("view-actor-last-name").value = last_name;
       });
     });
   }
 
-  // // Reload the page so the user can see that the actor was deleted
-  // console.log("Deleted actor with id: " + id);
-  // location.reload();
-
+  // ---------------------------------------------------------------------------
   // UPDATE
   const updateActorBtns = document.querySelectorAll(".update-actor");
   const updateActorForm = document.getElementById("update-actor-form");
 
   // Set up the event listener for the edit Actor buttons to open modal and display the current values in the input fields
-  if (editActorBtns) {
-    editActorBtns.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        // Grabs the id of the element that goes by the name, "id"
-        const id = event.target.getAttribute("data-id");
-        const firstName = event.target.getAttribute("data-firstName");
-        const lastName = event.target.getAttribute("data-lastName");
+  if (updateActorBtns) {
+    updateActorBtns.forEach((button) => {
+      button.addEventListener("click", () => {
+        const id = button.dataset.id;
+        const first_name = button.dataset.first_name;
+        const last_name = button.dataset.last_name;
 
-        document.getElementById("updatedFirstName").value = firstName;
-        document.getElementById("updatedLastName").value = lastName;
+        document.getElementById("update-actor-id").value = id;
+        document.getElementById("update-actor-first-name").value = first_name;
+        document.getElementById("update-actor-last-name").value = last_name;
+
+        console.log("User has selected to update the actor with id:", id);
       });
     });
   }
@@ -138,19 +119,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     updateActorForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      $("#updateActorModal").modal("hide");
+      const id = document.getElementById("update-actor-id").value;
 
-      // Grabs the value of the textarea in the input for firstName and lastName
-      const updatedActor = {
-        firstName: document.getElementById("updatedFirstName").value.trim(),
-        lastName: document.getElementById("updatedLastName").value.trim(),
+      const updated_actor = {
+        firstName: document
+          .getElementById("update-actor-first-name")
+          .value.trim(),
+        lastName: document
+          .getElementById("update-actor-last-name")
+          .value.trim(),
       };
 
-      // Send POST request to create a new actor
-      editActor(updatedActor).then((response) => {
-        // Check that the response is all good
-        // Reload the page so the user can see that the actor has been updated
+      // Send PUT request to update an existing actor in the database
+      updateActor(id, updated_actor).then((response) => {
         if (response.ok) {
+          console.log(`Updated Actor with ID: ${id}`);
           location.reload("/");
         } else {
           alert("something went wrong!");
@@ -159,40 +142,49 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 
-  // READ
-  // Set up the event listener for the view Actor buttons to open modal and display the current values in the input fields
-  const viewActorBtns = document.querySelectorAll("#viewActor");
-  if (viewActorBtns) {
-    viewActorBtns.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        // Grabs the id of the element that goes by the name, "id"
-        const firstName = event.target.getAttribute("data-firstName");
-        const lastName = event.target.getAttribute("data-lastName");
+  // -------------------------------------------------------------------------
+  // DELETE
+  const deleteActorBtns = document.querySelectorAll(".delete-actor");
+  const deleteActorForm = document.querySelector("#delete-actor-form");
 
-        document.getElementById("viewFirstName").value = firstName;
-        document.getElementById("viewLastName").value = lastName;
+  // Set up the event listeners for each delete button, and modal body
+
+  deleteActorBtns.forEach((button) => {
+    button.addEventListener("click", () => {
+      // Grabs the id of the element that goes by the name, "id"
+
+      const id = button.dataset.id;
+      const first_name = button.dataset.first_name;
+      const last_name = button.dataset.last_name;
+
+      console.log("User has selected to delete the actor with id:", id);
+
+      document.getElementById("delete-modal-body").textContent =
+        "Are you sure you want to delete this actor: " +
+        first_name +
+        " " +
+        last_name +
+        "?";
+
+      document.getElementById("delete-actor-id").value = id;
+    });
+  });
+
+  if (deleteActorForm) {
+    deleteActorForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const id = document.getElementById("delete-actor-id").value;
+
+      // Send the delete request
+      deleteActor(id).then((response) => {
+        if (response.ok) {
+          console.log(`Deleted Actor with ID: ${id}`);
+          location.reload();
+        } else {
+          alert("Something went wrong");
+        }
       });
     });
   }
 });
-
-//       fetch("/api/actors", {
-//         method: "POST",
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "application/json",
-//         },
-//         // Make sure to serialize the JSON body
-//         body: JSON.stringify(newActor),
-//       }).then(() => {
-//         // Empty the form
-//         document.getElementById("firstName").value = "";
-//         document.getElementById("lastName").value = "";
-
-//         // Reload the page so the user can see the new actor
-//         console.log("Created a new actor!");
-//         location.reload();
-//       });
-//     });
-//   }
-// });
