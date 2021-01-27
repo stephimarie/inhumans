@@ -1,0 +1,281 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-5">
+      <h2>All Actors</h2>
+    </div>
+    <div class="col-7">
+      <div class="d-flex justify-content-end">
+        <button
+          class="btn btn-success float-right create-actor"
+          data-toggle="modal"
+          data-target="#create-actor-modal"
+        >
+          <i class="fas fa-plus mr-2"></i>Create New Actor
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h2 class="text-center">Our Actors</h2>
+  {{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+  {{/if}}
+  <hr />
+  <div class="row justify-content-center no-gutters">
+    {{#each actors}}
+    <div class="col-6 col-md-4 col-lg-3 p-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center font-weight-bold pb-3">{{this.firstName}} {{this.lastName}}</h4>
+          <div class="text-center">
+            <img data-id="{{ this.id }}" data-image="{{this.image}}" src="/images/uploads/tmp/{{this.image}}" alt="{{this.image}}" width="150px">
+          </div>
+          <div class="button-group float-right mt-4">
+            <button
+              class="btn btn-sm btn-primary view-actor"
+              data-toggle="modal"
+              data-target="#view-actor-modal"
+              data-id="{{ this.id }}"
+              data-first_name="{{ this.firstName }}"
+              data-last_name="{{ this.lastName }}"
+              data-image="{{ this.image }}"
+            ><i class="fas fa-eye"></i></button>
+            <button
+              type="button"
+              class="btn btn-sm btn-warning update-actor"
+              data-toggle="modal"
+              data-target="#update-actor-modal"
+              data-id="{{ this.id }}"
+              data-first_name="{{ this.firstName }}"
+              data-last_name="{{ this.lastName }}"
+              data-image="{{ this.image }}"
+            ><i class="fas fa-edit"></i></button>
+            <button
+              class="btn btn-sm btn-danger delete-actor"
+              data-toggle="modal"
+              data-target="#delete-actor-modal"
+              data-id="{{ this.id }}"
+              data-first_name="{{ this.firstName }}"
+              data-last_name="{{ this.lastName }}"
+              data-image="{{ this.image }}"
+            ><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+    
+{{!-- Modal to create a new actor --}}
+<modal class="modal" tabindex="-1" role="dialog" id="create-actor-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Create A New Actor</h3>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="create-actor-form" method="POST" enctype="multipart/form-data" action="/api/actors">
+          <!-- Upload Image Section -->
+          <div class="upload-profile-image d-flex justify-content-center pb-5">
+            <div class="text-center">
+              <div class="d-flex justify-content-center">
+                <i class="fas fa-camera camera-icon"></i>
+              </div>
+              <img
+                src="/images/default_avatar.png"
+                style="width: auto; height: 200px"
+                class="img rounded-circle"
+                alt="profile"
+              />
+              <small class="form-text text-black-50">Choose Image</small>
+              <input
+                type="file"
+                class="form-control-file"
+                name="file"
+                id="upload-profile"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="create-actor-first-name">First Name</label>
+              <input
+                class="form-control"
+                placeholder="Enter the first name..."
+                type="text"
+                id="create-actor-first-name" name="firstName"
+              />
+            </div>
+            <div class="form-group col-6">
+              <label for="create-actor-last-name">Last Name:</label><br />
+              <input
+                class="form-control"
+                type="text"
+                placeholder="Enter the last name..."
+                id="create-actor-last-name" name="lastName"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Create Actor</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</modal>
+    
+
+{{!-- Modal to view a selected actor --}}
+<modal class="modal" id="view-actor-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">View Actor</h3>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Image Section -->
+        <div class="upload-profile-image d-flex justify-content-center pb-5">
+          <div class="text-center">
+            <img
+              src="" alt=""
+              style="width: auto; height: 200px"
+              class="img rounded-circle" id="view-actor-image"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label for="view-actor-first-name">First Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="view-actor-first-name"
+              readonly
+            />
+          </div>
+          <div class="form-group col-6">
+            <label for="view-actor-last-name">Last Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="view-actor-last-name"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</modal>
+
+{{!-- Modal to update a selected actor --}}
+<modal class="modal" id="update-actor-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Update Actor</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="update-actor-form">
+        <div class="modal-body">
+          <!-- Image Section -->
+          <div class="upload-profile-image d-flex justify-content-center pb-5">
+            <div class="text-center">
+              <img
+                src="" alt=""
+                style="width: auto; height: 200px"
+                class="img rounded-circle" id="update-actor-image"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="hidden" id="update-actor-id" class="form-control" required/>
+          </div>
+          <div class="form-row">
+            <div class="form-group　col-6">
+              <label for="update-actor-first-name">First Name:</label>
+              <input type="text" class="form-control" id="update-actor-first-name">
+            </div>
+            <div class="form-group　col-6">
+              <label for="update-actor-last-name">Last Name:</label>
+              <input type="text" class="form-control" id="update-actor-last-name"></input>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Actor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</modal>
+
+{{!-- Delete confirmation Modal --}}
+<modal class="modal" id="delete-actor-modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Confirm delete</h3>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="delete-modal-body"></div>
+      <div class="modal-footer">
+        <form id="delete-actor-form">
+          <input
+            type="hidden"
+            id="delete-actor-id"
+            class="form-control"
+            required
+          />
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</modal>

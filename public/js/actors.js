@@ -42,40 +42,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       body: JSON.stringify(actor),
     });
 
-  // ----------------------------------------------------------------------------------
-  // CREATE
-  const createActorForm = document.getElementById("create-actor-form");
-  if (createActorForm) {
-    createActorForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      // Grabs the value of the textarea in the input for firstName and lastName
-      const newActor = {
-        firstName: document
-          .getElementById("create-actor-first-name")
-          .value.trim(),
-        lastName: document
-          .getElementById("create-actor-last-name")
-          .value.trim(),
-      };
-
-      // Send POST request to create a new actor
-      saveActor(newActor).then((response) => {
-        if (response.ok) {
-          // Empty the form
-          document.getElementById("create-actor-first-name").value = "";
-          document.getElementById("create-actor-last-name").value = "";
-
-          // Reload the page so the user can see the new actor
-          console.log("Created a new actor!");
-          location.reload();
-        } else {
-          alert("Something went wrong");
-        }
-      });
-    });
-  }
-
   // ------------------------------------------------------------------------------------
   // READ
   // Set up the event listener for the view Actor buttons to open modal
@@ -86,9 +52,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
       button.addEventListener("click", () => {
         const first_name = button.dataset.first_name;
         const last_name = button.dataset.last_name;
+        const image = button.dataset.image;
 
         document.getElementById("view-actor-first-name").value = first_name;
         document.getElementById("view-actor-last-name").value = last_name;
+        document.getElementById(
+          "view-actor-image"
+        ).src = `/images/uploads/tmp/${image}`;
+        document.getElementById(
+          "view-actor-image"
+        ).alt = `${first_name} ${last_name}'s Profile`;
       });
     });
   }
@@ -105,10 +78,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const id = button.dataset.id;
         const first_name = button.dataset.first_name;
         const last_name = button.dataset.last_name;
+        const image = button.dataset.image;
 
         document.getElementById("update-actor-id").value = id;
         document.getElementById("update-actor-first-name").value = first_name;
         document.getElementById("update-actor-last-name").value = last_name;
+        document.getElementById(
+          "update-actor-image"
+        ).src = `/images/uploads/tmp/${image}`;
+        document.getElementById(
+          "update-actor-image"
+        ).alt = `${first_name} ${last_name}'s Profile`;
 
         console.log("User has selected to update the actor with id:", id);
       });
