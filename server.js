@@ -6,7 +6,6 @@ const db = require("./models");
 
 const PORT = 3066 || process.env.PORT;
 
-
 global.__basedir = __dirname;
 
 app.use(express.static("public"));
