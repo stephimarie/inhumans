@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         len: [1, 40],
       },
     },
+    isKiller: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     image: {
       type: DataTypes.STRING,
     },
