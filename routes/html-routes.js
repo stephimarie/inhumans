@@ -8,4 +8,11 @@ module.exports = (app) => {
   app.get("/chartSelect", (req, res) => {
     res.render("chartSelect.handlebars");
   });
+
+  app.get("/gameInfo", (req, res) => {
+    res.render("game-info.handlebars");
+  });
+  app.get("/teamInfo", (req, res) => {
+    res.render("team-info.handlebars");
+  });
 };
