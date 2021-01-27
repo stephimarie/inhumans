@@ -138,10 +138,15 @@ const actorsMove = () => {
             });
             data.occupants = [];
             queueArray.forEach((val) => {
-                roomList[rngExclusion(0,roomList.length,roomList.indexOf(data))].occupants.push(val);
+                num = isAdjacent(data);
+                roomList.forEach((data2) => {
+                    if (data2.id == num) {
+                        data2.occupants.push(val);
+                    };
+                });
             });
             hereArray.forEach((val) => {
-                roomList[roomList.indexOf(data)].occupants.push(val);
+                data.occupants.push(val);
             });
         };
     });
@@ -183,7 +188,7 @@ const roomStatus = () => {
                 } else if (i == val.occupants.length - 1) {
                     allOcc.push(` and ${val.occupants[i].identity}`);
                 } else if (i < val.occupants.length) {
-                    allOcc.push(`, ${val.occupants[i].identity},`);
+                    allOcc.push(`, ${val.occupants[i].identity}`);
                 };
             };
             console.log(`${allOcc.join('')} are inside ${val.roomName}.`);
@@ -194,6 +199,10 @@ const roomStatus = () => {
             });
         };
     });
+};
+
+const isAdjacent = (room) => {
+    return room.adjacentTo[rng(0, room.adjacentTo.length)];
 };
 
 // A minor utility function that allows for RNG rolls.
