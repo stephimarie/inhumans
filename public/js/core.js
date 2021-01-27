@@ -118,9 +118,10 @@ const initialPlacement = () => {
 const simTurn = () => {
     turns.turn += 1
     console.log(`Turn ${turns.turn} begins.`)
-    // TODO: Setup movement.
     actorsMove();
     roomStatus();
+    refreshMoves();
+    endCheck();
 };
 
 const actorsMove = () => {
@@ -155,7 +156,7 @@ const actorsMove = () => {
 // A utility function that checks to see if the actor is in the murder room.
 const investigateRoom = (room, actor) => {
     if (room.isMurderRoom == true && actor.isKiller == false) {
-        actor.foundRoom = room.id;
+        actor.foundRoom = roomList.indexOf(room);
         console.log(`${actor.identity} has found the murder room!`);
     } else {
         return;
@@ -203,6 +204,25 @@ const roomStatus = () => {
 
 const isAdjacent = (room) => {
     return room.adjacentTo[rng(0, room.adjacentTo.length)];
+};
+
+const refreshMoves = () => {
+    actorsList.forEach((data) => {
+        data.hasMoved = false;
+    });
+};
+
+const endCheck = () => {
+    let gameOver = false;
+    actorsList.forEach((data) => {
+        if (data.foundRoom == murderRoomCheck()) {
+            console.log(`The sim is over! ${data.identity} has solved the case!`);
+            gameOver = true;
+        };
+    });
+    if (gameOver == false) {
+        simTurn();
+    };
 };
 
 // A minor utility function that allows for RNG rolls.
