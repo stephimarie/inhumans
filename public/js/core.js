@@ -10,6 +10,7 @@ const actorsList = [
         isKiller: false,
         foundKiller: 0,
         foundRoom: 0,
+        hasMoved: false,
     },
     actor2 = {
         id: 2,
@@ -17,6 +18,7 @@ const actorsList = [
         isKiller: false,
         foundKiller: 0,
         foundRoom: 0,
+        hasMoved: false,
     },
     actor3 = {
         id: 3,
@@ -24,6 +26,7 @@ const actorsList = [
         isKiller: false,
         foundKiller: 0,
         foundRoom: 0,
+        hasMoved: false,
     },
     actor4 = {
         id: 4,
@@ -31,6 +34,7 @@ const actorsList = [
         isKiller: false,
         foundKiller: 0,
         foundRoom: 0,
+        hasMoved: false,
     },
     actor5 = {
         id: 5,
@@ -38,6 +42,7 @@ const actorsList = [
         isKiller: false,
         foundKiller: 0,
         foundRoom: 0,
+        hasMoved: false,
     }
 ];
 
@@ -115,6 +120,31 @@ const simTurn = () => {
     console.log(`Turn ${turns.turn} begins.`)
     // TODO: Setup movement.
     actorsMove();
+    roomStatus();
+};
+
+const actorsMove = () => {
+    roomList.forEach((data) => {
+        if (data.occupants.length > 0) {
+            let queueArray = [];
+            let hereArray = [];
+            data.occupants.forEach((val) => {
+                if (val.hasMoved == false) {
+                    val.hasMoved = true;
+                    queueArray.push(val);
+                } else {
+                    hereArray.push(val);
+                };
+            });
+            data.occupants = [];
+            queueArray.forEach((val) => {
+                roomList[rngExclusion(0,roomList.length,roomList.indexOf(data))].occupants.push(val);
+            });
+            hereArray.forEach((val) => {
+                roomList[roomList.indexOf(data)].occupants.push(val);
+            });
+        };
+    });
 };
 
 // A utility function that checks to see if the actor is in the murder room.
