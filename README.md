@@ -23,7 +23,7 @@ Our focus was to offer a fun twist to the traditional murder Mystery and connect
 *  MySql
 
 ## Resource preferences:
-* [Multer](https://www.npmjs.com/package/multer): Node.js middleware for handling multipart/form-data
+* [Multer](https://www.npmjs.com/package/multer)
 * [Handlebars](https://handlebarsjs.com/)
 * [Add](https://)
 * [Add](https://)
