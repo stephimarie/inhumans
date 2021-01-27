@@ -5,6 +5,8 @@ const app = express();
 const db = require("./models");
 const PORT = 3005 || process.env.PORT;
 
+global.__basedir = __dirname;
+
 app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));

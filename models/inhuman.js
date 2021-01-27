@@ -1,8 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-
   const { Sequelize } = sequelize;
   const Actor = sequelize.define("Actor", {
-
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -12,10 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: {
-        len: [1,40],
+        len: [1, 40],
       },
+    },
+    image: {
+      type: DataTypes.STRING,
+    },
+    imageData: {
+      type: DataTypes.BLOB("long"),
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -26,5 +30,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: Sequelize.literal("now()"),
     },
   });
+
   return Actor;
 };
