@@ -1,21 +1,22 @@
 module.exports = (sequelize, DataTypes) => {
-
   const { Sequelize } = sequelize;
   const Actor = sequelize.define("Actor", {
-
-    firstName: {
+    identity: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1, 40],
       },
     },
-    lastName: {
+    isKiller: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    image: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        len: [1,40],
-      },
+    },
+    imageData: {
+      type: DataTypes.BLOB("long"),
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -26,5 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: Sequelize.literal("now()"),
     },
   });
+
   return Actor;
 };
