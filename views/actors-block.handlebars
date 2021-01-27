@@ -28,7 +28,7 @@
     <div class="col-6 col-md-4 col-lg-3 p-3">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title text-center font-weight-bold pb-3">{{this.firstName}} {{this.lastName}}</h4>
+          <h4 class="card-title text-center font-weight-bold pb-3">{{this.identity}}</h4>
           <div class="text-center">
             <img data-id="{{ this.id }}" data-image="{{this.image}}" src="/images/uploads/tmp/{{this.image}}" alt="{{this.image}}" width="150px">
           </div>
@@ -38,8 +38,7 @@
               data-toggle="modal"
               data-target="#view-actor-modal"
               data-id="{{ this.id }}"
-              data-first_name="{{ this.firstName }}"
-              data-last_name="{{ this.lastName }}"
+              data-identity="{{ this.identity }}"
               data-image="{{ this.image }}"
             ><i class="fas fa-eye"></i></button>
             <button
@@ -48,8 +47,7 @@
               data-toggle="modal"
               data-target="#update-actor-modal"
               data-id="{{ this.id }}"
-              data-first_name="{{ this.firstName }}"
-              data-last_name="{{ this.lastName }}"
+              data-identity="{{ this.identity }}"
               data-image="{{ this.image }}"
             ><i class="fas fa-edit"></i></button>
             <button
@@ -57,8 +55,7 @@
               data-toggle="modal"
               data-target="#delete-actor-modal"
               data-id="{{ this.id }}"
-              data-first_name="{{ this.firstName }}"
-              data-last_name="{{ this.lastName }}"
+              data-identity="{{ this.identity }}"
               data-image="{{ this.image }}"
             ><i class="fas fa-trash-alt"></i></button>
           </div>
@@ -108,25 +105,14 @@
               />
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group col-6">
-              <label for="create-actor-first-name">First Name</label>
-              <input
-                class="form-control"
-                placeholder="Enter the first name..."
-                type="text"
-                id="create-actor-first-name" name="firstName"
-              />
-            </div>
-            <div class="form-group col-6">
-              <label for="create-actor-last-name">Last Name:</label><br />
-              <input
-                class="form-control"
-                type="text"
-                placeholder="Enter the last name..."
-                id="create-actor-last-name" name="lastName"
-              />
-            </div>
+          <div class="form-group">
+            <label for="create-actor-identity">Identity:</label>
+            <input
+              class="form-control"
+              placeholder="Enter the actor's identity..."
+              type="text"
+              id="create-actor-identity" name="identity"
+            />
           </div>
           <div class="modal-footer">
             <button
@@ -171,25 +157,14 @@
             />
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group col-6">
-            <label for="view-actor-first-name">First Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="view-actor-first-name"
-              readonly
-            />
-          </div>
-          <div class="form-group col-6">
-            <label for="view-actor-last-name">Last Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="view-actor-last-name"
-              readonly
-            />
-          </div>
+        <div class="form-group">
+          <label for="view-actor-identity">Identity:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="view-actor-identity"
+            readonly
+          />
         </div>
       </div>
       <div class="modal-footer">
@@ -226,15 +201,9 @@
           <div class="form-group">
             <input type="hidden" id="update-actor-id" class="form-control" required/>
           </div>
-          <div class="form-row">
-            <div class="form-group　col-6">
-              <label for="update-actor-first-name">First Name:</label>
-              <input type="text" class="form-control" id="update-actor-first-name">
-            </div>
-            <div class="form-group　col-6">
-              <label for="update-actor-last-name">Last Name:</label>
-              <input type="text" class="form-control" id="update-actor-last-name"></input>
-            </div>
+          <div class="form-group">
+            <label for="update-actor-identity">Identity:</label>
+            <input type="text" class="form-control" id="update-actor-identity">
           </div>
         </div>
         <div class="modal-footer">

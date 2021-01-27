@@ -1,14 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const { Sequelize } = sequelize;
   const Actor = sequelize.define("Actor", {
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1, 40],
-      },
-    },
-    lastName: {
+    identity: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

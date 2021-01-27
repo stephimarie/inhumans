@@ -3,7 +3,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const app = express();
 const db = require("./models");
-const PORT = 3005 || process.env.PORT;
+const PORT = 3009 || process.env.PORT;
 
 global.__basedir = __dirname;
 

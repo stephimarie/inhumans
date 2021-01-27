@@ -13,8 +13,7 @@ module.exports = (app) => {
         for (let i = 0; i < inhumans_db.length; i++) {
           let actor = {
             id: inhumans_db[i].id,
-            firstName: inhumans_db[i].firstName,
-            lastName: inhumans_db[i].lastName,
+            identity: inhumans_db[i].identity,
             image: inhumans_db[i].image,
           };
           actorsArray.push(actor);
@@ -56,8 +55,7 @@ module.exports = (app) => {
       // we use Sequelize model create() method to save an Image object (type, name, data) to MySQL database.
       // data is gotten from uploads folder (that middleware function stored the image).
       db.Actor.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        identity: req.body.identity,
         image: req.file.originalname,
         // To write data, we use fs.readFileSync('/path/to/file') functions of Node.js fs module
         imageData: fs.readFileSync(
@@ -107,8 +105,7 @@ module.exports = (app) => {
   app.put("/api/actors/:id", (req, res) => {
     db.Actor.update(
       {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        identity: req.body.identity,
       },
       {
         where: {

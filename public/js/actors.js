@@ -50,18 +50,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
   if (viewActorBtns) {
     viewActorBtns.forEach((button) => {
       button.addEventListener("click", () => {
-        const first_name = button.dataset.first_name;
-        const last_name = button.dataset.last_name;
+        const identity = button.dataset.identity;
         const image = button.dataset.image;
 
-        document.getElementById("view-actor-first-name").value = first_name;
-        document.getElementById("view-actor-last-name").value = last_name;
+        document.getElementById("view-actor-identity").value = identity;
         document.getElementById(
           "view-actor-image"
         ).src = `/images/uploads/tmp/${image}`;
         document.getElementById(
           "view-actor-image"
-        ).alt = `${first_name} ${last_name}'s Profile`;
+        ).alt = `${identity}'s Profile`;
       });
     });
   }
@@ -76,19 +74,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
     updateActorBtns.forEach((button) => {
       button.addEventListener("click", () => {
         const id = button.dataset.id;
-        const first_name = button.dataset.first_name;
-        const last_name = button.dataset.last_name;
+        const identity = button.dataset.identity;
         const image = button.dataset.image;
 
         document.getElementById("update-actor-id").value = id;
-        document.getElementById("update-actor-first-name").value = first_name;
-        document.getElementById("update-actor-last-name").value = last_name;
+        document.getElementById("update-actor-identity").value = identity;
         document.getElementById(
           "update-actor-image"
         ).src = `/images/uploads/tmp/${image}`;
         document.getElementById(
           "update-actor-image"
-        ).alt = `${first_name} ${last_name}'s Profile`;
+        ).alt = `${identity}'s Profile`;
 
         console.log("User has selected to update the actor with id:", id);
       });
@@ -102,12 +98,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const id = document.getElementById("update-actor-id").value;
 
       const updated_actor = {
-        firstName: document
-          .getElementById("update-actor-first-name")
-          .value.trim(),
-        lastName: document
-          .getElementById("update-actor-last-name")
-          .value.trim(),
+        identity: document.getElementById("update-actor-identity").value.trim(),
       };
 
       // Send PUT request to update an existing actor in the database
@@ -134,17 +125,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
       // Grabs the id of the element that goes by the name, "id"
 
       const id = button.dataset.id;
-      const first_name = button.dataset.first_name;
-      const last_name = button.dataset.last_name;
+      const identity = button.dataset.identity;
 
       console.log("User has selected to delete the actor with id:", id);
 
       document.getElementById("delete-modal-body").textContent =
-        "Are you sure you want to delete this actor: " +
-        first_name +
-        " " +
-        last_name +
-        "?";
+        "Are you sure you want to delete this actor: " + identity + "?";
 
       document.getElementById("delete-actor-id").value = id;
     });
