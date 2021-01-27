@@ -3,7 +3,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const app = express();
 const db = require("./models");
-const PORT = 3009 || process.env.PORT;
+const PORT = 3012 || process.env.PORT;
 
 global.__basedir = __dirname;
 
@@ -16,8 +16,8 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // ROUTES
-require("./controllers/inhuman_controller")(app);
-require("./controllers/html-routes")(app);
+require("./routes/api-routes")(app);
+require("./routes/html-routes")(app);
 
 // LISTENER
 db.sequelize.sync({ force: true }).then(() => {
