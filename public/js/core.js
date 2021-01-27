@@ -167,13 +167,21 @@ const investigateRoom = (room, actor) => {
 const murderRoomCheck = () => {
     let roomNum = 0;
     roomList.forEach((val) => {
-            if (val.isMurderRoom == true) {
-                roomNum = roomList.indexOf(val)
-            } else {
-                return;
-            };
+        if (val.isMurderRoom == true) {
+            roomNum = roomList.indexOf(val);
+        };
     });
     return roomNum;
+};
+
+const killerCheck = () => {
+    let killerNum = 0;
+    actorsList.forEach((val) => {
+        if (val.isKiller == true) {
+            killerNum = actorsList.indexOf(val);
+        };
+    });
+    return killerNum;
 };
 
 // A major function that checks and prints the status of all actors.
