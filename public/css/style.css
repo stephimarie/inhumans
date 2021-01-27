@@ -1,4 +1,50 @@
 
+.upload-profile-image {
+  position: relative;
+  width: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  transition: filter 0.8s ease;
+}
+
+.upload-profile-image:hover {
+  filter: drop-shadow(1px 1px 22px #7584bb);
+}
+
+#upload-profile {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 200px;
+  margin-top: 0px;
+  opacity: 0;
+}
+
+#upload-profile::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+#upload-profile::before {
+  content: "";
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.upload-profile-image .camera-icon {
+  position: absolute;
+  top: 70px;
+  font-size: 60px !important;
+  filter: invert(40%) !important;
+}
+
+.upload-profile-image:hover .camera-icon {
+  filter: invert(70%) !important;
+}
+=======
+
 @import url('https://fonts.googleapis.com/css?family=Monoton');
 
 
