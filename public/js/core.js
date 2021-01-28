@@ -8,40 +8,40 @@ const actorsList = [
         id: 1,
         identity: "Black Bolt",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
         hasMoved: false,
     },
     actor2 = {
         id: 2,
         identity: "Medusa",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
         hasMoved: false,
     },
     actor3 = {
         id: 3,
         identity: "Karnak the Shatterer",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
         hasMoved: false,
     },
     actor4 = {
         id: 4,
         identity: "Crystal",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
         hasMoved: false,
     },
     actor5 = {
         id: 5,
         identity: "Lockjaw",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
         hasMoved: false,
     }
 ];
@@ -200,6 +200,7 @@ const roomStatus = () => {
                     allOcc.push(`, ${val.occupants[i].identity}`);
                 };
             };
+            //TODO: Need to add investigate person function.
             console.log(`${allOcc.join('')} are inside ${val.roomName}.`);
         } else {
             Object.values(val.occupants).forEach(data => {
@@ -223,6 +224,7 @@ const refreshMoves = () => {
 const endCheck = () => {
     let gameOver = false;
     actorsList.forEach((data) => {
+        //TODO: Add the condition for == killerCheck
         if (data.foundRoom == murderRoomCheck()) {
             console.log(`The sim is over! ${data.identity} has solved the case!`);
             gameOver = true;
