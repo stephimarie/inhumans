@@ -18,9 +18,9 @@
     </div>
   </div>
 </div>
-
 <div class="container">
-  <h1 class="text-center">Our Actors</h1>
+  <h2 class="text-center">Our Actors</h2>
+   <p>Create your own avatar to play as yourself, or select one of our automatically generated ones.</p>
   {{#if error}}
     <div class="alert alert-danger">{{error}}</div>
   {{/if}}
@@ -67,7 +67,11 @@
     {{/each}}
   </div>
 </div>
-    
+<div class="container">
+  <div class="row justify-content-center no-gutters">
+    <button><a href="/game">Start Game</a></button>
+  </div>
+</div>    
 {{!-- Modal to create a new actor --}}
 <modal class="modal" tabindex="-1" role="dialog" id="create-actor-modal">
   <div class="modal-dialog">
