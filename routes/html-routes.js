@@ -15,4 +15,7 @@ module.exports = (app) => {
   app.get("/teamInfo", (req, res) => {
     res.render("team-info.handlebars");
   });
+  app.get("/game", (req, res) => {
+    res.render("game");
+  });
 };
