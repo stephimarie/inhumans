@@ -1,0 +1,1 @@
+This public/images/uploads directory is needed for our multer npm package to work with image uploads

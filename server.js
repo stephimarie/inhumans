@@ -3,7 +3,8 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const app = express();
 const db = require("./models");
-const PORT = 30912 || process.env.PORT;
+
+const PORT = process.env.PORT || 5000;
 
 global.__basedir = __dirname;
 
@@ -20,7 +21,7 @@ require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
 // LISTENER
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
   app.listen(PORT, () =>
     console.log(`Listening on PORT ${PORT}. Live at http://localhost:${PORT}`)
   );
