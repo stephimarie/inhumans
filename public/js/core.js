@@ -175,7 +175,6 @@ const investigatePerson = (val) => {
             val2.foundKiller = killerNum;
         };
     });
-    console.log(val)
 };
 
 // A utility function that returns the index value of the murder room.
@@ -216,7 +215,6 @@ const roomStatus = () => {
                     allOcc.push(`, ${val.occupants[i].identity}`);
                 };
             };
-            //TODO: Need to add investigate person function.
             console.log(`${allOcc.join('')} are inside ${val.roomName}.`);
             investigatePerson(val.occupants);
         } else {
@@ -242,14 +240,23 @@ const endCheck = () => {
     let gameOver = false;
     actorsList.forEach((data) => {
         //TODO: Add the condition for == killerCheck
-        if (data.foundRoom == murderRoomCheck()) {
-            console.log(`The sim is over! ${data.identity} has solved the case!`);
+        if (data.foundRoom == murderRoomCheck() && data.foundKiller == killerCheck()) {
+
+            console.log(`The sim is over! ${data.identity} discovered that ${killerName()} had murdered an Inhuman at the ${mRoomName()}!`);
             gameOver = true;
         };
     });
     if (gameOver == false) {
         simTurn();
     };
+};
+
+const killerName = () => {
+    return actorsList[killerCheck()].identity;
+};
+
+const mRoomName = () => {
+    return roomList[murderRoomCheck()].roomName;
 };
 
 // A minor utility function that allows for RNG rolls.
