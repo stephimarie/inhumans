@@ -226,3 +226,45 @@ span{
 #actorsBackground {
   height: 100vh;
 }
+
+.modal-content {
+  background-color:black;
+}
+
+h3 {
+  color: whitesmoke;
+}
+
+.card {
+  background-color:transparent;
+  border-color: turquoise;
+}
+
+.form-text-black-50 {
+  color: whitesmoke;
+  text-decoration: white;
+}
+
+.btn {
+  background-color:turquoise;
+  border-color: violet;
+}
+
+.btn-success {
+  color: #ffffff;
+  background-color:violet;
+  border-color:turquoise;
+}
+
+.btn-success.focus, .btn-success:focus {
+  color: #fff;
+  background-color: turquoise;
+  border-color:violet;
+  box-shadow: 0 0 0 0.2rem rgb(72 180 97 / 50%);
+}
+
+#btnEfect {
+  color: #ffffff;
+  background-color:violet;
+  border-color:turquoise;
+}
