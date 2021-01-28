@@ -40,7 +40,7 @@ module.exports = (app) => {
   });
 
   // POST route for saving a new Actor. You can create a Actor using the data on req.body
-  app.post("/api/actors", upload.single("file"), async (req, res) => {
+  app.post("/api/actors", upload.single("file"), (req, res) => {
     console.log(req.body);
     try {
       console.log(req.file);
