@@ -8,36 +8,41 @@ const actorsList = [
         id: 1,
         identity: "Black Bolt",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
+        hasMoved: false,
     },
     actor2 = {
         id: 2,
         identity: "Medusa",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
+        hasMoved: false,
     },
     actor3 = {
         id: 3,
         identity: "Karnak the Shatterer",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
+        hasMoved: false,
     },
     actor4 = {
         id: 4,
         identity: "Crystal",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
+        hasMoved: false,
     },
     actor5 = {
         id: 5,
         identity: "Lockjaw",
         isKiller: false,
-        foundKiller: 0,
-        foundRoom: 0,
+        foundKiller: 10,
+        foundRoom: 10,
+        hasMoved: false,
     }
 ];
 
@@ -113,31 +118,86 @@ const initialPlacement = () => {
 const simTurn = () => {
     turns.turn += 1
     console.log(`Turn ${turns.turn} begins.`)
-    // TODO: Setup movement.
     actorsMove();
+    roomStatus();
+    refreshMoves();
+    endCheck();
+};
+
+const actorsMove = () => {
+    roomList.forEach((data) => {
+        if (data.occupants.length > 0) {
+            let queueArray = [];
+            let hereArray = [];
+            data.occupants.forEach((val) => {
+                if (val.hasMoved == false) {
+                    val.hasMoved = true;
+                    queueArray.push(val);
+                } else {
+                    hereArray.push(val);
+                };
+            });
+            data.occupants = [];
+            queueArray.forEach((val) => {
+                num = isAdjacent(data);
+                roomList.forEach((data2) => {
+                    if (data2.id == num) {
+                        data2.occupants.push(val);
+                    };
+                });
+            });
+            hereArray.forEach((val) => {
+                data.occupants.push(val);
+            });
+        };
+    });
 };
 
 // A utility function that checks to see if the actor is in the murder room.
 const investigateRoom = (room, actor) => {
     if (room.isMurderRoom == true && actor.isKiller == false) {
-        actor.foundRoom = room.id;
+        actor.foundRoom = roomList.indexOf(room);
         console.log(`${actor.identity} has found the murder room!`);
     } else {
         return;
     };
 };
 
+const investigatePerson = (val) => {
+    let killerHere = false;
+    let killerNum
+    val.forEach((val2) => {
+        if (val2.isKiller == true) {
+            killerHere = true;
+            killerNum = killerCheck();
+        };
+        if (killerHere == true && val2.isKiller == false) {
+            console.log(`${val2.identity} has found the murderer!`)
+            val2.foundKiller = killerNum;
+        };
+    });
+};
+
 // A utility function that returns the index value of the murder room.
 const murderRoomCheck = () => {
     let roomNum = 0;
     roomList.forEach((val) => {
-            if (val.isMurderRoom == true) {
-                roomNum = roomList.indexOf(val)
-            } else {
-                return;
-            };
+        if (val.isMurderRoom == true) {
+            roomNum = roomList.indexOf(val);
+        };
     });
     return roomNum;
+};
+
+//Returns the index number of the current killer.
+const killerCheck = () => {
+    let killerNum = 0;
+    actorsList.forEach((val) => {
+        if (val.isKiller == true) {
+            killerNum = actorsList.indexOf(val);
+        };
+    });
+    return killerNum;
 };
 
 // A major function that checks and prints the status of all actors.
@@ -153,10 +213,11 @@ const roomStatus = () => {
                 } else if (i == val.occupants.length - 1) {
                     allOcc.push(` and ${val.occupants[i].identity}`);
                 } else if (i < val.occupants.length) {
-                    allOcc.push(`, ${val.occupants[i].identity},`);
+                    allOcc.push(`, ${val.occupants[i].identity}`);
                 };
             };
             console.log(`${allOcc.join('')} are inside ${val.roomName}.`);
+            investigatePerson(val.occupants);
         } else {
             Object.values(val.occupants).forEach(data => {
                 console.log(`${data.identity} is inside ${val.roomName}.`);
@@ -164,6 +225,39 @@ const roomStatus = () => {
             });
         };
     });
+};
+
+const isAdjacent = (room) => {
+    return room.adjacentTo[rng(0, room.adjacentTo.length)];
+};
+
+const refreshMoves = () => {
+    actorsList.forEach((data) => {
+        data.hasMoved = false;
+    });
+};
+
+const endCheck = () => {
+    let gameOver = false;
+    actorsList.forEach((data) => {
+        //TODO: Add the condition for == killerCheck
+        if (data.foundRoom == murderRoomCheck() && data.foundKiller == killerCheck()) {
+
+            console.log(`The sim is over! ${data.identity} discovered that ${killerName()} had murdered an Inhuman at the ${mRoomName()}!`);
+            gameOver = true;
+        };
+    });
+    if (gameOver == false) {
+        simTurn();
+    };
+};
+
+const killerName = () => {
+    return actorsList[killerCheck()].identity;
+};
+
+const mRoomName = () => {
+    return roomList[murderRoomCheck()].roomName;
 };
 
 // A minor utility function that allows for RNG rolls.
