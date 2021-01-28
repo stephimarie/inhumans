@@ -74,9 +74,9 @@ window.addEventListener("scroll", () => {
   section1.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 });
 
-var startGame = document.querySelector("#startGame");
-console.log(startGame)
+// var startGame = document.querySelector("#startGame");
+// console.log(startGame)
 
-startGame.onclick = function () {
-  location.href = "/api/actors";
-};
+// startGame.onclick = function () {
+//   location.href = "/api/actors";
+// };
