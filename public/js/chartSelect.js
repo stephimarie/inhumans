@@ -73,10 +73,3 @@ window.addEventListener("scroll", () => {
   const [r, g, b] = [red / y, green / y, blue / y].map(Math.round);
   section1.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 });
-
-// var startGame = document.querySelector("#startGame");
-// console.log(startGame)
-
-// startGame.onclick = function () {
-//   location.href = "/api/actors";
-// };
