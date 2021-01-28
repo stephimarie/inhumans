@@ -172,6 +172,7 @@ const investigatePerson = (val) => {
             killerNum = killerCheck();
         };
         if (killerHere == true && val2.isKiller == false) {
+            console.log(`${val2.identity} has found the murderer!`)
             val2.foundKiller = killerNum;
         };
     });
