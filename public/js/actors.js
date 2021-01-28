@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
   if (event) {
     console.info("DOM loaded");
   }
+//local background
+var backgroundImage = localStorage.getItem("background");
+console.log(backgroundImage);
+
+var actorsBackground = $("#actorsBackground");
+actorsBackground.css("background","url("+backgroundImage+") center fixed");
 
   // Function for getting all actors from the db
   const getActors = () =>
