@@ -163,6 +163,21 @@ const investigateRoom = (room, actor) => {
     };
 };
 
+const investigatePerson = (val) => {
+    let killerHere = false;
+    let killerNum
+    val.forEach((val2) => {
+        if (val2.isKiller == true) {
+            killerHere = true;
+            killerNum = killerCheck();
+        };
+        if (killerHere == true && val2.isKiller == false) {
+            val2.foundKiller = killerNum;
+        };
+    });
+    console.log(val)
+};
+
 // A utility function that returns the index value of the murder room.
 const murderRoomCheck = () => {
     let roomNum = 0;
@@ -174,6 +189,7 @@ const murderRoomCheck = () => {
     return roomNum;
 };
 
+//Returns the index number of the current killer.
 const killerCheck = () => {
     let killerNum = 0;
     actorsList.forEach((val) => {
@@ -202,6 +218,7 @@ const roomStatus = () => {
             };
             //TODO: Need to add investigate person function.
             console.log(`${allOcc.join('')} are inside ${val.roomName}.`);
+            investigatePerson(val.occupants);
         } else {
             Object.values(val.occupants).forEach(data => {
                 console.log(`${data.identity} is inside ${val.roomName}.`);
