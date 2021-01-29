@@ -11,7 +11,7 @@ Our focus was to offer a fun twist to the traditional murder Mystery and connect
 * [Presentation](https://docs.google.com/presentation/)
 
 ## Video clip of our Website:
-<iframe src=“https://drive.google.com/file/d/1lPCCAsp4By13ptk95GhkVXH7YAXesTr2/preview” width=“640" height=“480”></iframe>
+
 
 ## BuiltWith:
 
