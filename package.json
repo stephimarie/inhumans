@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VictorMoscone/inhumans.git"
+    "url": "git+https://github.com/kaylamuraoka/inhumans"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/VictorMoscone/inhumans/issues"
+    "url": "https://github.com/kaylamuraoka/inhumans/issues"
   },
-  "homepage": "https://github.com/VictorMoscone/inhumans#readme",
+  "homepage": "https://github.com/kaylamuraoka/inhumans#readme",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",

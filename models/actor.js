@@ -12,6 +12,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    foundKiller: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    foundRoom: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    hasMoved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
     image: {
       type: DataTypes.STRING,
     },
