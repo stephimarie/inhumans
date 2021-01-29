@@ -27,7 +27,7 @@ const imageFilter = (req, file, cb) => {
   }
 };
 
-// combine the storage specification and imageFilter into a new multer object and then export it as a middleware: file upto only 1MB can be uploaded
+// combine the storage specification and imageFilter into a new multer object and then export it as a middleware: file up to only 1MB can be uploaded
 const upload = multer({
   storage: multerStorage,
   limits: { fileSize: 10000000 },
