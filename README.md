@@ -26,9 +26,11 @@ Our focus was to offer a fun twist to the traditional murder Mystery and connect
 
 ## Resource preferences:
 * [Multer](https://www.npmjs.com/package/multer)
-* [Handlebars](https://handlebarsjs.com/)
-* [Add](https://)
-* [Add](https://)
+* [Express-Handlebars](https://www.npmjs.com/package/express3-handlebars)
+* [Express](http://expressjs.com/)
+* [Sequelize](https://sequelize.org/)
+* [Bootswatch](https://bootswatch.com/lumen/)
+* [Bootstrap](https://getbootstrap.com/)
 
 ## Contributors:
 * [Stephanie McCandless](https://github.com/stephimarie )
@@ -37,4 +39,4 @@ Our focus was to offer a fun twist to the traditional murder Mystery and connect
 * [Lester Gonzalez](https://github.com/lstvgore)
 
 ## Links
-[Github Page](https://stephimarie.github.io/inhumans/.)
+[Heroku Page](https://stephimarie.github.io/inhumans/.)
