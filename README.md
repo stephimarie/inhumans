@@ -1,4 +1,4 @@
-# inhumans
+# Murder on the blue side of the Moon 
 
 
 ## Description:
@@ -8,7 +8,7 @@ Inhuman Murder mystery party game for 1-5 players.  What a fun way to play with 
 Our focus was to offer a fun twist to the traditional murder Mystery and connect with your friends, it's simple and user friendly. We especially wanted to reach a broad audience and be age-inclusive and accessible. We thought even those that don't know of the Inhumans characters could identifiable with at least one or create their own.
 
 ## Project Presentation:
-* [Presentation](https://docs.google.com/presentation/)
+* [Presentation](https://docs.google.com/presentation/d/18YGV1h4cPTSxkXj8izCgDhO4qByGFbHRbdG0tfgitiw/edit#slide=id.gb58aa8535d_0_3063)
 
 ## Screenshot from our Website:
 <img width="1168" alt="Screen Shot 2021-01-28 at 8 38 29 PM" src="https://user-images.githubusercontent.com/71304781/106232432-df149480-61a8-11eb-8c0c-bbb496742209.png">
@@ -16,12 +16,13 @@ Our focus was to offer a fun twist to the traditional murder Mystery and connect
 
 ## BuiltWith:
 
-* HTML
-* CSS
-* Bootstrap 
-* Handlebars
-* Sequel
-*  MySql
+* Express
+* Bootswatch lumen theme
+* Bootstrap v.4.5
+* Express-Handlebars
+* Sequelize
+* MySql2
+* Multer
 
 ## Resource preferences:
 * [Multer](https://www.npmjs.com/package/multer)
