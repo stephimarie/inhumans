@@ -39,4 +39,4 @@ Our focus was to offer a fun twist to the traditional murder Mystery and connect
 * [Lester Gonzalez](https://github.com/lstvgore)
 
 ## Links
-[Heroku Page](https://stephimarie.github.io/inhumans/.)
+[Heroku Page](https://inhumans-murder-mystery.herokuapp.com/)
