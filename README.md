@@ -10,7 +10,8 @@ Our focus was to offer a fun twist to the traditional murder Mystery and connect
 ## Project Presentation:
 * [Presentation](https://docs.google.com/presentation/)
 
-## Video clip of our Website:
+## Screenshot from our Website:
+<img width="1168" alt="Screen Shot 2021-01-28 at 8 38 29 PM" src="https://user-images.githubusercontent.com/71304781/106232432-df149480-61a8-11eb-8c0c-bbb496742209.png">
 
 
 ## BuiltWith:
