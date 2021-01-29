@@ -1,4 +1,4 @@
-# inhumans
+# Murder on the blue side of the Moon 
 
 ## Description:
 
@@ -9,6 +9,7 @@ Our focus was to offer a fun twist to the traditional murder Mystery and connect
 This repository contains a food application called Recipe Pal, which is powered by Javascript, Materialize CSS Framework, jQuery, and Google Fonts.
 
 ## Project Presentation:
+
 
 - [Presentation](https://docs.google.com/presentation/d/18YGV1h4cPTSxkXj8izCgDhO4qByGFbHRbdG0tfgitiw/edit?usp=sharing)
 
@@ -40,6 +41,14 @@ The following animation shows the web application's appearance and functionality
 - [**mysql2**](https://www.npmjs.com/package/mysql2)
 - [**multer**](https://www.npmjs.com/package/multer) - node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
 
+## Resource preferences:
+* [Multer](https://www.npmjs.com/package/multer)
+* [Express-Handlebars](https://www.npmjs.com/package/express3-handlebars)
+* [Express](http://expressjs.com/)
+* [Sequelize](https://sequelize.org/)
+* [Bootswatch](https://bootswatch.com/lumen/)
+* [Bootstrap](https://getbootstrap.com/)
+
 ## Contributors:
 
 This application was created by:
@@ -53,3 +62,4 @@ This application was created by:
 
 [**Github Repository**](https://stephimarie.github.io/inhumans/.)
 [**Deployed Application**](https://inhumans-murder-mystery.herokuapp.com/)
+
